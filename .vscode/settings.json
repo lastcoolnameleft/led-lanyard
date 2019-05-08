@@ -1,0 +1,7 @@
+{
+    "sync-rsync.local": "/Users/thfalgou/git/lastcoolnameleft/led-lanyard/",
+    "sync-rsync.remote": "pi@rpi-zerow:/home/pi/git/led-lanyard/",
+    "sync-rsync.onSave": true,
+    "python.pythonPath": "/usr/local/bin/python3",
+    "python.linting.pylintEnabled": true
+}
