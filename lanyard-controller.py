@@ -75,6 +75,8 @@ while True:
         Controller.RunningLightsPreExisting(.2, 100)
     elif command == 'heartbeat': # Couldn't get to work
         Controller.HeartBeatExisiting(3, .005, .003, 0.001, 6, .002, .003, 0.05, 1)
+    elif command == 'cylon':
+        Controller.Cylon(0, 2)
     else:
         #print('skipping')
         time.sleep(1)

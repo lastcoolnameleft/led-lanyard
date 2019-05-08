@@ -711,3 +711,58 @@ class Controller:
             pixels.fill((int(r), int(g), int(b)))
             pixels.show()
             time.sleep(delay)
+
+    def fadeall(scale):
+        for i in range(num_pixels): #for(int i = 0; i < NUM_LEDS; i++) 
+            #leds[i].nscale8(250)
+            
+            #get current color pf pixel
+            c = pixels[i]
+            red = c[0]
+            green = c[1]
+            blue = c[2]
+            
+            # scale color
+            #scale = 250
+            r = (scale/256.0)*red
+            g = (scale/256.0)*green
+            b = (scale/256.0)*blue
+
+            #change pixel
+            pixels[i] = (int(r),int(g),int(b))
+
+
+    def Cylon(delay, cycles):
+        for loop in range(cycles):
+            hue = 0
+            # First slide the led in one direction
+            for i in range(num_pixels):
+                # Set the i'th led to red 
+                hue = hue + 1
+                if hue == 256:
+                    hue = 0
+
+                pixels[i] =  Controller.wheel(hue) #CHSV(hue++, 255, 255);
+                # Show the leds
+                pixels.show() 
+                # now that we've shown the leds, reset the i'th led to black
+                # leds[i] = CRGB::Black;
+                Controller.fadeall(250)
+                # Wait a little bit before we loop around and do it again
+                time.sleep(delay) #delay(10);
+
+            # Now go in the other direction.  
+            for i in range(num_pixels-1,0,-1):
+                # Set the i'th led to red 
+                hue = hue + 1
+                if hue == 256:
+                    hue = 0
+
+                pixels[i] =  Controller.wheel(hue) #CHSV(hue++, 255, 255);
+                # Show the leds
+                pixels.show()
+                # now that we've shown the leds, reset the i'th led to black
+                # leds[i] = CRGB::Black;
+                Controller.fadeall(250)
+                # Wait a little bit before we loop around and do it again
+                time.sleep(delay) #delay(10);
