@@ -6,7 +6,7 @@ import os
 queue_file = '/tmp/messages.queue'
 app = Flask(__name__)
 
-allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle']
+allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
 
 def add_to_file(message):
     with open(queue_file, 'a') as file:
