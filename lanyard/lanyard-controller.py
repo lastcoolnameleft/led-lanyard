@@ -1,10 +1,13 @@
 import random
 import time
+import os
 from effects.ws2811 import Controller
+from azure.servicebus import QueueClient, Message
 
 queue_file = '/tmp/messages.queue'
 max_brightness = 150
 num_pixels = 144
+queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
 
 
 def get_command(queue_file):
@@ -17,12 +20,20 @@ def get_command(queue_file):
         fout.writelines(data[1:])
     return command
 
+def get_command_servicebus(queue_client):
+    ## Receive the message from the queue
+    with queue_client.get_receiver() as queue_receiver:
+        messages = queue_receiver.fetch_next(timeout=3)
+        for message in messages:
+            print(message)
+            message.complete()
 command = None
 
 while True:
     random.seed()
 
-    command = get_command(queue_file)
+    #command = get_command(queue_file)
+    command = get_command_servicebus(queue_client)
 
     if command == 'black':
         Controller.fill_black()

@@ -1,3 +1,0 @@
-Flask
-azure-servicebus
-twilio

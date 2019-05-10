@@ -1,6 +1,3 @@
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-
 import http.server
 import json
 import asyncio
@@ -8,9 +5,13 @@ from botbuilder.schema import (Activity, ActivityTypes, ChannelAccount)
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import (MicrosoftAppCredentials,
                                          JwtTokenValidation, SimpleCredentialProvider)
+from azure.servicebus import QueueClient, Message
+import os
 
-APP_ID = ''
-APP_PASSWORD = ''
+bot_app_id = os.getenv('BOT_APP_ID')
+bot_app_password = os.getenv('BOT_APP_PASSWORD')
+sb_queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
+allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
 
 
 class BotRequestHandler(http.server.BaseHTTPRequestHandler):
@@ -30,7 +31,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(202)
         self.end_headers()
         if activity.members_added[0].id != activity.recipient.id:
-            credentials = MicrosoftAppCredentials(APP_ID, APP_PASSWORD)
+            credentials = MicrosoftAppCredentials(bot_app_id, bot_app_password)
             reply = BotRequestHandler.__create_reply_activity(activity, 'Hello and welcome to the echo bot!')
             connector = ConnectorClient(credentials, base_url=reply.service_url)
             connector.conversations.send_to_conversation(reply.conversation.id, reply)
@@ -38,13 +39,14 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
     def __handle_message_activity(self, activity):
         self.send_response(200)
         self.end_headers()
-        credentials = MicrosoftAppCredentials(APP_ID, APP_PASSWORD)
+        credentials = MicrosoftAppCredentials(bot_app_id, bot_app_password)
         connector = ConnectorClient(credentials, base_url=activity.service_url)
-        reply = BotRequestHandler.__create_reply_activity(activity, 'You said: %s' % activity.text)
+        response = BotRequestHandler.process_message(activity.text)
+        reply = BotRequestHandler.__create_reply_activity(activity, response)
         connector.conversations.send_to_conversation(reply.conversation.id, reply)
 
     def __handle_authentication(self, activity):
-        credential_provider = SimpleCredentialProvider(APP_ID, APP_PASSWORD)
+        credential_provider = SimpleCredentialProvider(bot_app_id, bot_app_password)
         loop = asyncio.new_event_loop()
         try:
             loop.run_until_complete(JwtTokenValidation.authenticate_request(
@@ -75,6 +77,22 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
             self.__handle_message_activity(activity)
         else:
             self.__unhandled_activity()
+
+    # Lanyard code
+    def add_to_servicebus(message):
+        # Send a test message to the queue
+        print("Adding to servicebus queue: " + message)
+        sb_queue_client.send(Message(message))
+
+    def process_message(message):
+        response = ''
+        if message not in allowed_settings:
+            response = "I did not recognize that value.  Try one of the following:" + str(allowed_settings)
+        else:
+            #add_to_file(message_body)
+            BotRequestHandler.add_to_servicebus(message)
+            response = "Your request has been added to the queue."
+        return response
 
 
 try:
