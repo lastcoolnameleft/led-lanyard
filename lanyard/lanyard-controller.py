@@ -7,11 +7,15 @@ from azure.servicebus import QueueClient, Message
 queue_file = '/tmp/messages.queue'
 max_brightness = 150
 num_pixels = 144
-queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
+#queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
 
 
 def get_command(queue_file):
     command = None
+
+    # Touch the file because it might not exist on bootup
+    open(queue_file, 'a').close()
+
     with open(queue_file, 'r') as fin:
         data = fin.read().splitlines(True)
         if data:
@@ -32,8 +36,8 @@ command = None
 while True:
     random.seed()
 
-    #command = get_command(queue_file)
-    command = get_command_servicebus(queue_client)
+    command = get_command(queue_file)
+    #command = get_command_servicebus(queue_client)
 
     if command == 'black':
         Controller.fill_black()

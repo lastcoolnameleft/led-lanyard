@@ -1,0 +1,14 @@
+[Unit]
+Description=twilio-listener
+After=lanyard.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/lanyard/twilio-listener.py
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+IgnoreSIGPIPE=true
+Type=simple
+EnvironmentFile=/opt/lanyard/env.sh
+
+[Install]
+WantedBy=multi-user.target
