@@ -1,6 +1,7 @@
 import http.server
 import json
 import asyncio
+import ssl
 from botbuilder.schema import (Activity, ActivityTypes, ChannelAccount)
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import (MicrosoftAppCredentials,
@@ -10,9 +11,13 @@ import os
 
 bot_app_id = os.getenv('BOT_APP_ID')
 bot_app_password = os.getenv('BOT_APP_PASSWORD')
-sb_queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
+ssl_key_file = os.getenv('SSL_KEY_FILE')
+ssl_cert_file = os.getenv('SSL_CERT_FILE')
+sb_conn_string = os.getenv('SERVICEBUS_CONN_STRING')
+
 allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
 
+sb_queue_client = QueueClient.from_connection_string(sb_conn_string, 'request')
 
 class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -97,6 +102,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
 try:
     SERVER = http.server.HTTPServer(('0.0.0.0', 9000), BotRequestHandler)
+    SERVER.socket = ssl.wrap_socket (SERVER.socket, keyfile=ssl_key_file, certfile=ssl_cert_file, server_side=True)
     print('Started http server')
     SERVER.serve_forever()
 except KeyboardInterrupt:
