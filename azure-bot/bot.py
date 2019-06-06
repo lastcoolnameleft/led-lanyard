@@ -6,18 +6,18 @@ from botbuilder.schema import (Activity, ActivityTypes, ChannelAccount)
 from botframework.connector import ConnectorClient
 from botframework.connector.auth import (MicrosoftAppCredentials,
                                          JwtTokenValidation, SimpleCredentialProvider)
-from azure.servicebus import QueueClient, Message
 import os
 
 bot_app_id = os.getenv('BOT_APP_ID')
 bot_app_password = os.getenv('BOT_APP_PASSWORD')
-ssl_key_file = os.getenv('SSL_KEY_FILE')
-ssl_cert_file = os.getenv('SSL_CERT_FILE')
-sb_conn_string = os.getenv('SERVICEBUS_CONN_STRING')
+queue_file = os.getenv('QUEUE_FILE')
+
+print('bot_app_id=' + bot_app_id)
+print('bot_app_password=' + bot_app_password)
+if not bot_app_id or not bot_app_password or not queue_file:
+    exit('Must set env vars for: BOT_APP_ID, BOT_APP_PASSWORD and QUEUE_FILE')
 
 allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
-
-sb_queue_client = QueueClient.from_connection_string(sb_conn_string, 'request')
 
 class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -37,7 +37,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         if activity.members_added[0].id != activity.recipient.id:
             credentials = MicrosoftAppCredentials(bot_app_id, bot_app_password)
-            reply = BotRequestHandler.__create_reply_activity(activity, 'Hello and welcome to the echo bot!')
+            reply = BotRequestHandler.__create_reply_activity(activity, 'Hello and welcome to the lanyard bot!')
             connector = ConnectorClient(credentials, base_url=reply.service_url)
             connector.conversations.send_to_conversation(reply.conversation.id, reply)
 
@@ -84,25 +84,24 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
             self.__unhandled_activity()
 
     # Lanyard code
-    def add_to_servicebus(message):
-        # Send a test message to the queue
-        print("Adding to servicebus queue: " + message)
-        sb_queue_client.send(Message(message))
+    @staticmethod
+    def add_to_file(message):
+        with open(queue_file, 'a') as file:
+            file.write(message + "\n")
+        file.close()
 
+    @staticmethod
     def process_message(message):
         response = ''
         if message not in allowed_settings:
             response = "I did not recognize that value.  Try one of the following:" + str(allowed_settings)
         else:
-            #add_to_file(message_body)
-            BotRequestHandler.add_to_servicebus(message)
+            BotRequestHandler.add_to_file(message)
             response = "Your request has been added to the queue."
         return response
 
-
 try:
     SERVER = http.server.HTTPServer(('0.0.0.0', 9000), BotRequestHandler)
-    SERVER.socket = ssl.wrap_socket (SERVER.socket, keyfile=ssl_key_file, certfile=ssl_cert_file, server_side=True)
     print('Started http server')
     SERVER.serve_forever()
 except KeyboardInterrupt:

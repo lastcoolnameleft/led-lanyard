@@ -1,4 +1,4 @@
-azure-servicebus
 botbuilder-core
-aiohttp>=3.0.0
-uamqp
+botbuilder-schema
+botframework-connector
+asyncio>=3.4.3
