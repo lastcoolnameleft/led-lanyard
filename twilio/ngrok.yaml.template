@@ -1,0 +1,11 @@
+authtoken: 
+log_level: debug
+log: /tmp/ngrok.log
+tunnels:
+  ssh:
+    proto: tcp
+    addr: 22
+  twilio:
+    proto: http
+    addr: 5000
+    bind-tls: true
