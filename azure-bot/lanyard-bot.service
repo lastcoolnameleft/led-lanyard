@@ -1,0 +1,13 @@
+[Unit]
+Description=lanyard-bot
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/lanyard/bot.py
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=process
+IgnoreSIGPIPE=true
+Type=simple
+EnvironmentFile=/opt/lanyard/env.sh
+
+[Install]
+WantedBy=multi-user.target
