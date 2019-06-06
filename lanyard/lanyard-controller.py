@@ -5,7 +5,6 @@ import requests
 from effects.ws2811 import Controller
 
 queue_file = '/tmp/messages.queue'
-api_url = 'http://bot.lastcoolnameleft.com:5000/pull'
 max_brightness = 150
 num_pixels = 144
 #queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
@@ -24,26 +23,12 @@ def get_command_file(queue_file):
         fout.writelines(data[1:])
     return command
 
-def get_command_servicebus(queue_client):
-    ## Receive the message from the queue
-    with queue_client.get_receiver() as queue_receiver:
-        messages = queue_receiver.fetch_next(timeout=3)
-        for message in messages:
-            print(message)
-            message.complete()
-
-def get_command_api(api_url):
-    r = requests.get(api_url)
-    return r.text
-
 command = None
 
 while True:
     random.seed()
 
     command = get_command_file(queue_file)
-    #command = get_command_api(api_url)
-    #command = get_command_servicebus(queue_client)
 
     if command == 'black':
         Controller.fill_black()
