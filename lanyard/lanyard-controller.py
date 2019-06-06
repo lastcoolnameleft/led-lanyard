@@ -1,14 +1,15 @@
 import random
 import time
 import os
+import requests
 from effects.ws2811 import Controller
 from azure.servicebus import QueueClient, Message
 
 queue_file = '/tmp/messages.queue'
+api_url = 'http://bot.lastcoolnameleft.com:5000/pull'
 max_brightness = 150
 num_pixels = 144
 #queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
-
 
 def get_command(queue_file):
     command = None
@@ -31,12 +32,18 @@ def get_command_servicebus(queue_client):
         for message in messages:
             print(message)
             message.complete()
+
+def get_command_api(api_url):
+    r = requests.get(api_url)
+    return r.text
+
 command = None
 
 while True:
     random.seed()
 
-    command = get_command(queue_file)
+    #command = get_command(queue_file)
+    command = get_command_api(api_url)
     #command = get_command_servicebus(queue_client)
 
     if command == 'black':

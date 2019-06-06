@@ -124,3 +124,4 @@ dmypy.json
 
 # Personal files
 env.sh
+*.pem
