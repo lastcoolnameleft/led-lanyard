@@ -1,3 +1,5 @@
+# Most of these have been copied (with approval) from https://github.com/DanStach/rpi-ws2811 . Thanks Dan!
+
 import time
 import board
 import random

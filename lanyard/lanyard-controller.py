@@ -5,9 +5,8 @@ import requests
 from effects.ws2811 import Controller
 
 queue_file = '/tmp/messages.queue'
-max_brightness = 150
+max_brightness = 150 # Full brightness might pull too much current and burn the RPi
 num_pixels = 144
-#queue_client = QueueClient.from_connection_string(os.getenv('SERVICEBUS_CONN_STRING'), 'request')
 
 def get_command_file(queue_file):
     command = None

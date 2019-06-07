@@ -17,7 +17,7 @@ print('bot_app_password=' + bot_app_password)
 if not bot_app_id or not bot_app_password or not queue_file:
     exit('Must set env vars for: BOT_APP_ID, BOT_APP_PASSWORD and QUEUE_FILE')
 
-allowed_settings = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
+allowed_actions = ['blue', 'red', 'green', 'black', 'fill-random', 'msft', 'fadeinout', 'chase', 'follow', 'fire', 'level-colors', 'sparkle', 'cylon']
 
 class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -93,8 +93,8 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
     @staticmethod
     def process_message(message):
         response = ''
-        if message not in allowed_settings:
-            response = "I did not recognize that value.  Try one of the following:" + str(allowed_settings)
+        if message not in allowed_actions:
+            response = "I did not recognize that value.  Try one of the following:" + str(allowed_actions)
         else:
             BotRequestHandler.add_to_file(message)
             response = "Your request has been added to the queue."
