@@ -9,7 +9,7 @@ fi
 apt-get install lighttpd
 cp index.html /var/www/html/index.html
 
-cp lanyard-bot.service /lib/systemd/system/
+cp azure-bot.service /lib/systemd/system/
 
 mkdir -p /opt/lanyard
 cp env.sh /opt/lanyard
@@ -18,5 +18,5 @@ cp ngrok.yaml /opt/ngrok
 
 pip3 install -r requirements.txt
 
-systemctl enable lanyard-bot.service
-systemctl restart lanyard-bot.service
+systemctl enable azure-bot.service
+systemctl restart azure-bot.service

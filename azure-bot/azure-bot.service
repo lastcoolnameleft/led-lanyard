@@ -1,5 +1,6 @@
 [Unit]
-Description=lanyard-bot
+Description=azure-bot
+After=lanyard.target
 
 [Service]
 ExecStart=/usr/bin/python3 /opt/lanyard/bot.py
