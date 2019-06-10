@@ -1,46 +1,16 @@
-# led-lanyard
+# LED Lanyard
 
 ## Introduction
 
 My friend [Dan Stach](https://github.com/DanStach/rpi-ws2811) was the inspiration behind all of this.  From his prototype and with help from [Bricks and Minifigs of Dallas, TX](https://www.facebook.com/BAMNorthDallas/), we built the first [LEGO LED lanyard + badge holder](https://twitter.com/lastcoolname/status/1136092293801418753).  I've since extended it to be RaspberryPi controlled with the intent to Open Source/Package the design.
 
-## Parts
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I got tired of boring lanyards, so I made my own. <a href="https://t.co/LPd8Roi6rd">pic.twitter.com/LPd8Roi6rd</a></p>&mdash; Tommy Falgout (@lastcoolname) <a href="https://twitter.com/lastcoolname/status/1136092293801418753?ref_src=twsrc%5Etfw">June 5, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-If you want, you can purchase the components individually and assemble yourself.  If there's enough interest, I will offer a packaged solution.
+## Getting started
 
-* [Wireless RF LED RGP Controller](https://amzn.to/2WrNkZ1)
-* [WS2812B RGB LED Strip 144 pixels](https://amzn.to/2Whalc4) - This is where the magic happens.  
-* [5.5mm x 2.1mm Barrel Jack to USB DC Cable](https://amzn.to/2XrmtZn)
-* [Portable battery](https://amzn.to/2XzPceK) - You can use an existing power bank if you don't want to purchase
-* [Tubular Polyester Webbing](https://www.strapworks.com/product_p/stpw1.htm) - You'll need at least 4 feet.  White diffuses the light better, but black gives it a more 8-bit aesthetic. 
-* Hot Glue Gun + Hot Glue
-* Matches/open flame
-* LEGO.  Lots of 1 width Technic LEGO bricks.  Preferably, the same color as your webbing.
+This repo is broken up into parts:
 
-## Organization
-
-This repo is broken up into three parts (directories):
-
-* lanyard - The base component.  Listens for commands.
-* twilio - Receives command from twilio
-* azure-bot - Reveives commands from the Azure Bot Framework
-
-## Installation
-
-Each directory has a `install.sh` script used to install and setup that component
-
-## Lanyard component
-
-This periodically pulls the top line from a file to determine which LED configuration it should use.  
-
-### Lanyard effects
-
-The `lanyard/effects/ws2811.py` file contains most of the math/algorithms for using the different LED configurations.
-
-## Twilio
-
-If you want to interact with the lanyard via Twilio, you can specify your twilio details and texts sent to your phone number will be added to the message queue.
-
-## Azure Bot Framework
-
-If you want to interact with the lanyard via the Azure Bot Framework, you can specify your Azure Bot Framework connection details and any messages sent to the bot will be added to the message queue.
+* [Parts](docs/parts.md) - If you are interested in purchasing your own, here is the list of parts necessary.
+* [Assembly](docs/assembly.md) - After you have all of the parts, go here to assemble it.
+* [Extending with Raspberry Pi](docs/raspberrypi.md) - The RF controller has pre-programmed effects; however, if you want to program your own, you can use your own controller.  I have created some examples with integrations to [Twilio](https://www.twilio.com/) and [Azure Bot Framework](https://azure.microsoft.com/en-us/services/bot-service/).
