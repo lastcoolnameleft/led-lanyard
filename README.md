@@ -5,7 +5,6 @@
 My friend [Dan Stach](https://github.com/DanStach/rpi-ws2811) was the inspiration behind all of this.  From his prototype and with help from [Bricks and Minifigs of Dallas, TX](https://www.facebook.com/BAMNorthDallas/), we built the first [LEGO LED lanyard + badge holder](https://twitter.com/lastcoolname/status/1136092293801418753).  I've since extended it to be RaspberryPi controlled with the intent to Open Source/Package the design.
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I got tired of boring lanyards, so I made my own. <a href="https://t.co/LPd8Roi6rd">pic.twitter.com/LPd8Roi6rd</a></p>&mdash; Tommy Falgout (@lastcoolname) <a href="https://twitter.com/lastcoolname/status/1136092293801418753?ref_src=twsrc%5Etfw">June 5, 2019</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## Getting started
 
