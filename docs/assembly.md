@@ -18,6 +18,4 @@
 1. Cut extra wires off of LED strip so that only connection to controller still exists. (Not needed for this build and will take up space)
 1. Feed LED strip into webbing
 1. Reconnect LED strip to LED Controller, Barrel Jack cable and Portable Battery.  Turn on controller to test again.
-1. Connect LED lanyard to badge.  This can be done through a few ways:
-    1. Build custom LEGO case to feed lanyard into case and hold battery + cabling
-    1. Hot glue battery + cabling to badge provided.  Some on-site field work would be required.  
+1. Connect LED lanyard to badge.  

@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from twilio.twiml.messaging_response import MessagingResponse
 import os
 
@@ -12,6 +12,22 @@ def add_to_file(message):
     with open(queue_file, 'a') as file:
         file.write(message + "\n")
     file.close()
+
+@app.route("/bot")
+def bot():
+    return render_template("bot.html")
+
+@app.route("/lanyard", methods=['GET', 'POST'])
+def add_to_queue():
+    setting = request.form.get('setting', default="", type=str)
+    response = "Error"
+    if setting not in allowed_settings:
+        response = "I did not recognize that value (" + str(setting) + ").  Try one of the following:" + str(allowed_settings)
+    else:
+        add_to_file(setting)
+        response = "Your request has been added to the queue."
+
+    return response
 
 @app.route("/sms", methods=['GET', 'POST'])
 def sms_ahoy_reply():
