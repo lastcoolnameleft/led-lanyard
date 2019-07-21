@@ -126,3 +126,4 @@ dmypy.json
 env.sh
 *.pem
 ngrok.yaml
+.DS_Store
