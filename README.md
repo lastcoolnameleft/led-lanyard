@@ -4,13 +4,13 @@ This project is for the design and reference for building of an LED lanyard, pri
 
 ## Background
 
-[Dan Stach](https://github.com/DanStach/), the original creator of the LED lanyard, build a prototype for his work badge using his X-mas tree neopixel creation.  Extending this design,  I worked with [Bricks and Minifigs of Dallas, TX](https://www.facebook.com/BAMNorthDallas/), to build the first [LEGO LED lanyard + badge holder](https://twitter.com/lastcoolname/status/1136092293801418753).  I posted this to Twitter which receive a tremendous amount of attention, so this repo is intended to host build and extention details for the LED Lanyard.
+[Dan Stach](https://github.com/DanStach/), the original creator of the LED lanyard, built a prototype for his work badge using [Neopixels](https://www.adafruit.com/category/168).  Extending this design,  I worked with [Bricks and Minifigs of Dallas, TX](https://www.facebook.com/BAMNorthDallas/), to build a LEGO case and [posted it to Twitter](https://twitter.com/lastcoolname/status/1136092293801418753) where I got a lot of positive feedback.
 
 The original design utilized an Neopixels with an RF hardware controller.  With Dan's help, we've extended it to run on a RaspberryPi + Python.
 
 ## Getting started
 
-This repo is broken up into parts:
+This repo is broken up into:
 
 * [Parts](docs/parts.md) - If you are interested in building your own, this is the Build Of Materials (BOM).
 * [Assembly](docs/assembly.md) - After you have all of the parts, you will need to assemble them.
