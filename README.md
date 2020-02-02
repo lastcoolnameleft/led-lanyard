@@ -7,7 +7,7 @@ This project is for the design and reference for building of an LED lanyard, pri
 
 [Dan Stach](https://github.com/DanStach/), the original creator of the LED lanyard, built a prototype for his work badge using [Neopixels](https://www.adafruit.com/category/168).  Extending this design,  I worked with [Bricks and Minifigs of Dallas, TX](https://www.facebook.com/BAMNorthDallas/), to build a LEGO case and [got a lot of interest from social media](https://twitter.com/lastcoolname/status/1136092293801418753).
 
-[![LED Lanyard Tweet](https://github.com/lastcoolnameleft/led-lanyard/raw/master/docs/led-lanyard-tweet.png)](https://twitter.com/lastcoolname/status/1136092293801418753)
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I got tired of boring lanyards, so I made my own. <a href="https://t.co/LPd8Roi6rd">pic.twitter.com/LPd8Roi6rd</a></p>&mdash; Tommy Falgout (@lastcoolname) <a href="https://twitter.com/lastcoolname/status/1136092293801418753?ref_src=twsrc%5Etfw">June 5, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 ## Getting started
