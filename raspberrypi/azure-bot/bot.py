@@ -92,6 +92,7 @@ class BotRequestHandler(http.server.BaseHTTPRequestHandler):
 
     @staticmethod
     def process_message(message):
+        message = message.lower()
         response = ''
         if message not in allowed_actions:
             response = "I did not recognize that value.  Try one of the following:" + str(allowed_actions)

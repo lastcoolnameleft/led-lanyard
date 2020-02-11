@@ -6,13 +6,13 @@ if (( $EUID != 0 )); then
 fi
 
 # Used for static bot framework page
-apt-get install lighttpd
+sudo apt-get -y install build-essential libssl-dev libffi-dev python-dev lighttpd
+
 cp index.html /var/www/html/index.html
 
 cp azure-bot.service /lib/systemd/system/
 
 mkdir -p /opt/lanyard
-cp env.sh /opt/lanyard
 cp bot.py /opt/lanyard
 cp ngrok.yaml /opt/ngrok
 
