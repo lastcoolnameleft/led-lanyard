@@ -2,6 +2,9 @@
     "sync-rsync.local": "/Users/thfalgou/git/lastcoolnameleft/led-lanyard/",
     "sync-rsync.remote": "pi@lanyard.local:/home/pi/git/led-lanyard/",
     "sync-rsync.onSave": true,
-    "python.pythonPath": "/usr/local/bin/python3",
-    "python.linting.pylintEnabled": true
+    "markdown.marp.themes": [
+      "./themes/microsoft.css",
+      "./themes/graph_paper.css",
+      "./themes/cybertopia.css"
+    ]
 }

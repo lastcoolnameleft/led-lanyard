@@ -1,0 +1,68 @@
+/* @theme microsoft */
+
+@import 'default';
+
+section {
+  font-family: 'Segoe UI' sans-serif;
+  color: black;
+}
+
+
+section.intro {
+  color: black;
+  line-height: 30.4px;
+}
+
+section.intro h1 {
+  color: #0078d3;
+  line-height: 100.4px;
+  font-size: 3em;
+  font-weight: 450;
+}
+
+section.intro h2 {
+  color: black;
+  line-height: 1.4px;
+  font-size: 1.2em;
+}
+
+section.intro-blue {
+  background: #0078d3;
+  color: white;
+}
+
+section.intro-blue img {
+  background-color: #0078d3;
+}
+
+section.intro-blue h1 {
+  color: white;
+  line-height: 100.4px;
+  font-size: 2.7em;
+  font-weight: 450;
+}
+
+section.intro-blue h2 {
+  color: white;
+  line-height: 1.4px;
+  font-size: 1.2em;
+}
+
+
+section.intro-white{
+  background: white;
+  color: #0078d3;
+}
+
+section.intro-white h1 {
+  color: #0078d3;
+  line-height: 70px;
+  font-size: 2.5em;
+  font-weight: 450;
+}
+
+section.intro-white h2 {
+  color: black;
+  line-height: 1.4px;
+  font-size: 12em;
+}

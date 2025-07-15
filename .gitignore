@@ -127,3 +127,5 @@ env.sh
 *.pem
 ngrok.yaml
 .DS_Store
+tmp
+build
