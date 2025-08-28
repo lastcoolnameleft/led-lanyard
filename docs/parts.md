@@ -3,7 +3,7 @@
 If you want, you can purchase the components individually and assemble yourself.  If there's enough interest, I will offer a packaged solution.
 
 * [14 key Wireless RF Remote + LED RGB Controller for WS2812B](https://amzn.to/2WrNkZ1)
-  * This is the hardware controller for the LED's which includes the remote.
+  * This is the hardware controller for the LEDs which includes the remote.
   * There are other RF remote + controller combos out there, and the "Add DIY" button because it allows you to cycle through specific patterns.
   * Unfortunately, controlling the brightness isn't intuitive (or documented).  To change brightness, uou must select a solid color and then hold down the "Speed -/+" button to change.
 * [WS2812B RGB LED Strip 144 pixels](https://amzn.to/2K5UtaP)

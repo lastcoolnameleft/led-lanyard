@@ -2,7 +2,7 @@
 
 **DISCLAIMER:  I am not an electrical engineer.  Please use with caution.**
 
-**WARNING!  Pulling too much current may cause controller to freeze.  This can happen when LEDs are on full brightness or when displaying white (which is all 3 RGB LED's running at the same time).  Unplug battery and plug back in to reset.**
+**WARNING!  Pulling too much current may cause controller to freeze.  This can happen when LEDs are on full brightness or when displaying white (which is all 3 RGB LEDs running at the same time).  Unplug battery and plug back in to reset.**
 
 # Verify equipment works.
 

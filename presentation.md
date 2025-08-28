@@ -17,18 +17,20 @@ Presented by: Tommy Falgout
 # Agenda
 
 - Intro
-- Origin Story
-- Know your LED's
+- Journey
+- Know your LEDs
 - Build Your Own!
 - Q&A
+
+![bg right:40% w:500](img/qr-code.png)
 
 ---
 
 # Me
 
-- Cloud Architect @ Microsoft (ex-Yahoo!, ex-Nortel)
+- Solution Architect @ Microsoft (ex-Yahoo!, ex-Nortel)
 - Builder of trebuchets (IMDB)
-- And amazingly enough, Dad (13 yo daughter)
+- And amazingly enough, Dad (15 yo daughter)
 - Color Blind (Deuteranomaly)
 
 ![bg right:50% w:600](https://planomagazine.com/wp-content/uploads/2015/09/SLINGFEST-DFW-TREBUCHET-CATAPULT-PLANO-MAGAZINE-SLIDESHOW.jpg)
@@ -36,7 +38,7 @@ Presented by: Tommy Falgout
 ---
 
 
-# Origin Story (Mark 1)
+# Journey (Part 1)
 
 - Dan Stach (friend) wanted to light Xmas tree using LEDs
 - Went down WS2811 + Raspberry Pi rabbit hole
@@ -44,11 +46,25 @@ Presented by: Tommy Falgout
 
 ---
 
-# Origin Story (Mark 2)
+# Journey (Part 2)
 
 https://www.ledlanyard.com/
 
 ![center :600](img/x.png)
+
+<!--
+I learned so much from watching my friend Dan to making my own.  
+This session will be about things I learned to help save you from those mistakes, unreturnable Amazon purchases and the sea of confusing lingo, specifications and math.
+
+-->
+
+---
+
+# Journey (Part 1.5)
+
+
+![vertical right:60% w:800](img/amazon-1.png)
+
 
 ---
 
@@ -67,8 +83,15 @@ https://www.ledlanyard.com/
 - RGB (Red Green Blue) - additive color mode of 3 primary colors.  Primary for digital displays 
   - RGBW (adds White)
 - AC (Alternating Current) - home/plugin power (US)
-- DC (Direct Current) - batteries, solar cells or AC/DC converters
-- Raspberry Pi (aka RPi) - Really tiny computer, runs Linux
+- DC (Direct Current) - batteries, solar cells
+- Raspberry Pi (aka RPi) - Really tiny computer ($30-$50)
+- ESP32 - low-cost, low-power microcontroller ($10 or less)
+
+---
+
+<!-- _class: invert -->
+
+# LEDs
 
 ---
 
@@ -89,7 +112,7 @@ _footer: Credit https://visualled.com/en/glossary/led-dip/
 
 ---
 
-# SMB LED
+# SMD LED
 
 - Surface Mounted Device
 - Described by the dimensions of the LED package
@@ -119,7 +142,6 @@ _footer: Credit https://hitlights.com/blogs/premium-led-strip-lighting/captivati
 
 ---
 
-<!-- _class: invert -->
 
 # Comparison
 
@@ -129,6 +151,19 @@ _footer: Credit https://hitlights.com/blogs/premium-led-strip-lighting/captivati
 _footer: Credit https://nseledcloud.com/dip-led-vs-smd-led/
 -->
 
+---
+
+# Size
+
+* 3528, 5050, 2835, etc.
+* Correlate to the size of the chip (in mm)
+* Might affect LED strip width (8mm vs 10mm)
+
+![bg right:50% w:600](img/led-size.png)
+
+<!--
+_footer: Credit https://www.flexfireleds.com/comparison-between-3528-leds-and-5050-leds/
+-->
 
 ---
 
@@ -144,6 +179,9 @@ _footer: Credit https://nseledcloud.com/dip-led-vs-smd-led/
   - DC 5V, 4 Pins, more compact and robust
   - Recommended for new project (reliability + wiring)
   - NeoPixel (Adafruit's brand)
+- WS2815
+  - DC 12V, more reliable
+  - Commercial
 
 ---
 
@@ -156,27 +194,9 @@ _footer: Credit https://nseledcloud.com/dip-led-vs-smd-led/
 
 ---
 
-# RGB vs RGBW (white)
-
-- Can consume more power
-- Can skip if doing simple animation
-
-
-
----
-
-# Weatherproofing
-
-- no waterproofing (IP20) - indoor use only
-- IP65 - water resistant (suitable for damp)
-- IP67 waterproof (good for outdoor, wet locations)
-- IP68 - fully waterproof (underwater lighting)
-
----
-
 # NeoPixel
 
-- Adafruit's brand of individually addressable Red Green Blue (RGB) LED
+- Adafruit's brand of addressable RGB LED
 - Based on the WS2812 & WS2811 LED/drivers
 - Extensive libraries and support via Adafruit
 - Used in wearable tech, custom Lightsabers, interactive displays
@@ -196,44 +216,81 @@ _footer: TL;DR: Thank you Lady Ada for making a really easy way to work with tin
 
 ---
 
+# Weatherproof
+
+![bg right:30% w:400](img/ip.png)
+
+- IP = Ingress Protection (rating)
+- IP20 - no waterproofing (indoor use only)
+- IP30 - no waterproofing (slightly better than IP20)
+- IP65 - water resistant (damp locations)
+- IP67 - waterproof (good for outdoor, wet locations)
+- IP68 - full waterproof (underwater)
+
+<!--
+_footer: Source https://www.ledsupply.com/blog/ip68-waterproof-led-strips-lights-for-pools-saunas-and-outdoors/
+-->
+---
+
 <!-- _class: invert -->
 
-# Controlling LED's
+# Controlling LEDs
 
 ---
 
 # FastLED
 
-* OSS Library
-  * Platform: Arduino, ESP32, RPi, and more
-  * Interface: Code
-  * Supports: WS2812 (and others)
-* Can drive 1000's of LED's
-* Efficient + Easy + Community
-* https://fastled.io/
+- OSS Library
+  - Platform: Arduino, ESP32, RPi, and more
+  - Interface: Code
+  - Supports: WS2812 (and others)
+- Can drive 1000's of LEDs
+- Efficient + Easy + Community
+- https://fastled.io/
 
 ---
 
 # WLED
 
-* OSS Firmware
-  * Platform: ESP32, ESP8266
-  * Interface: Web
-  * Supports: WS2812B
-  * Power: 5V, 12V, 24V
-* https://kno.wled.ge/
+- OSS Soft/Firmware
+  - Platform: ESP32, ESP8266
+  - Interface: Web + Wifi
+  - Supports: WS2812B
+  - Power: 5V, 12V, 24V
+- https://kno.wled.ge/
+- [WLED Beginners Guide](https://youtu.be/exAWzMfmwQ8?si=qRZxCbeIZCoc9zmH) (YouTube)
+---
+
+# NightDriver
+
+- OSS Soft/Firmware
+- Similar to WLED
+  - More programmable
+  - Smaller community
+- https://nightdriverled.com
 
 ---
 
+# Pixelblaze
+
+- Paid Hardware + Software
+  - Platform: ESP
+  - Interface: Web + WiFi
+  - Can write pattenrs in Javascript
+- https://electromage.com/pixelblaze
+
+---
+
+
 # Off-the-shelf
 
-* Amazon kits
-  * Platform: pre-built hardware
-  * Interface: remote control
-  * Supports: WS2812B (and sometimes others)
-  * Power: 5V, least consumption (~.2-.4A)
-* Example: 
-  * [14 key Wireless RF Remote + LED RGB Controller for WS2812B](https://amzn.to/4hyVnYn)
+- Amazon kits
+  - Platform: pre-built hardware
+  - Interface: remote control
+  - Supports: WS2812B (and sometimes others)
+  - Power: 5V, least consumption (~.2-.4A)
+- Example: 
+  - [14 key Wireless RF Remote + LED RGB Controller for WS2812B](https://amzn.to/4hyVnYn)
 
 ![bg right:45% w:500](img/led-controller.jpg)
 
@@ -241,9 +298,9 @@ _footer: TL;DR: Thank you Lady Ada for making a really easy way to work with tin
 
 # Larson Scanner
 
-* Cylon Heads in Battlestar Galactica
-* KITT's Scanner in Knight Rider
-* Maximilian's Scanner in The Black Hole
+- Cylon Heads in Battlestar Galactica
+- KITT's Scanner in Knight Rider
+- Maximilian's Scanner in The Black Hole
 
 ![bg right:40% w:500](img/cylon.gif)
 
@@ -255,13 +312,58 @@ _footer: TL;DR: Thank you Lady Ada for making a really easy way to work with tin
 
 ---
 
-# Build of Materials (BOM)
+# Batteries + Power Consumption
+
+WARNING:  MATH INVOLVED
+
+---
 
 
-* [WS2812B RGB LED Strip 144 pixels](https://amzn.to/4hdh5Bf)
-* [Portable battery](https://amzn.to/4iwiILw)
-* [5.5mm x 2.1mm Barrel Jack to Micro-USB Cable](https://amzn.to/4hc28PR)
-* [Tubular Polyester Webbing](https://amzn.to/3DVsmZ8)
+![bg right:40% w:500](img/ohm-volt-amp.png)
+
+- Volts = pressure pushing the water through the pipe
+- Amps = flow rate of the water 
+  (how much is moving)
+ - Ohms = resistance in the pipe 
+  (how hard it is for water to flow)
+
+---
+
+# Battery Capacity
+
+- mAh = how long a device can run
+- Think of mAh as the size of a fuel tank:
+  - A 2000 mAh battery can power a 100 mA device for 20 hours
+  - Higher mAh = longer runtime
+
+---
+
+# How do you measure this?!
+
+![bg right:40% w:500](img/usb-multimeter.png)
+- [USB multimeters](https://amzn.to/45PBLf5) are your friend!
+
+---
+
+# Example 
+
+- 5 meter WS2812B strip, 60 p/m, 5050 RGB, DC5v
+- Full brightness, all LED on white
+- Device current draw: 1.8 A
+- Battery capacity: 10,000 mAh = 10 Ah
+- Battery life = Battery capacity ÷ Device current
+- Battery life = 10 Ah ÷ 1.8 A = 5.56 hours
+
+---
+
+
+# Bill of Materials (BOM)
+
+
+- [WS2812B LED Strip SMD 5050 RGB DC5V IP20 144 pixels/m](https://amzn.to/4m922vz)
+- [Portable battery](https://amzn.to/4iwiILw)
+- [5.5mm x 2.1mm Barrel Jack to Micro-USB Cable](https://amzn.to/4hc28PR)
+- [Tubular Polyester Webbing](https://amzn.to/3DVsmZ8)
 
 <!--
 _footer: FYI, links are Amazon Associates.  My day job pays me enough that I don't need it, but it's fun to see the nickles roll in.
@@ -271,13 +373,32 @@ _footer: FYI, links are Amazon Associates.  My day job pays me enough that I don
 
 # Case options
 
-* Cigar box - cheap $1-free
-* Craft case
-* 3d print
-* LEGO
+- Cigar box - cheap $1-free
+- Craft case
+- 3d print
+- LEGO
 
 ---
 
-# Smart LED Lanyard
+# Gotchas
 
-Replace integrated controller with RPi
+![bg right:40% w:500](img/i-bent-my-wookie.png)
+
+- Be careful of too much flex
+
+
+
+---
+
+<!-- _class: invert -->
+
+# FIN
+
+---
+
+# Reminder
+
+![bg right:40% w:500](img/qr-code.png)
+
+- [LEDLanyard.com](https://www.ledlanyard.com) 
+- Rate this session!
